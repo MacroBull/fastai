@@ -4,6 +4,7 @@ import scipy.stats, scipy.special
 import abc, collections, hashlib, itertools, json, operator, pathlib
 import mimetypes, inspect, typing, functools, importlib, weakref
 import html, re, requests, tarfile, numbers, tempfile, bz2
+import pkg_resources
 
 from abc import abstractmethod, abstractproperty
 from collections import abc,  Counter, defaultdict, Iterable, namedtuple, OrderedDict
@@ -25,10 +26,6 @@ from matplotlib.patches import Patch
 from pandas import Series, DataFrame
 from io import BufferedWriter, BytesIO
 
-import pkg_resources
-pkg_resources.require("fastprogress>=0.1.19")
-from fastprogress.fastprogress import master_bar, progress_bar
-
 #for type annotations
 from numbers import Number
 from typing import Any, AnyStr, Callable, Collection, Dict, Hashable, Iterator, List, Mapping, NewType, Optional
@@ -47,3 +44,8 @@ def have_min_pkg_version(package, version):
         return True
     except:
         return False
+
+try:
+    from fastprogress.fastprogress import master_bar, progress_bar
+except:
+    pass
